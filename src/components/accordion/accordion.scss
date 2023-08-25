@@ -1,0 +1,68 @@
+@import '../../sass/main.scss';
+
+.accordion{
+    background-color: $color-third;
+    max-width: 1050px;
+    border-radius: 0 5px;
+    margin: 0 auto;
+    &_title{
+        @include flex(row, space-between, center);
+        background-color: $color-second;
+        color: $color-first;
+        border-radius: 10px;
+        font-weight: 500;
+        padding: 10px 15px;
+        cursor: pointer;
+        .arrow{
+            transition: all 0.2s ease-in-out;
+            @media screen and (max-width: 1230px){
+                width: 12px;     
+            }
+        }
+        .arrow_up{
+            transform: rotate(0deg);
+        }
+        .arrow_down{
+            transform: rotate(180deg);
+        }
+    }
+    &_content{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        letter-spacing: 1px;
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+        padding: 10px;
+        letter-spacing: 1px;
+        color: $color-second;
+        transition: visibility 0.5s ease-in-out,
+                    opacity 0.5s ease-in-out,
+                    height 0.2s ease-in-out;
+    }
+    &_content_hidden{
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+    }
+}
+
+.accommodation_accordion{
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+    margin: 30px auto;
+    width: 95%;
+    &_item{
+        width: 50%;
+    }
+    @media screen and (max-width: 650px){
+        flex-direction: column;
+        gap: 20px;
+        margin: 20px auto;
+        &_item{
+            width: 100%;
+        }    
+    }
+}
