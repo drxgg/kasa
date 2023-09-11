@@ -1,7 +1,9 @@
+// Import des modules et des styles
 import "./accommodation.scss";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import datas from "../../data/logement";
+import data from "../../data/logement";
+import NotFound from "../../pages/NotFound/NotFound";
 import Header from "../../components/header/Header";
 import Carousel from "../../components/carousel/Carousel";
 import Footer from "../../components/footer/Footer";
@@ -9,34 +11,47 @@ import Accordion from "../../components/accordion/Accordion";
 import greyStar from "../../assets/grey_star.png";
 import redStar from "../../assets/red_star.png";
 
+// Fonction principale pour le composant "Accommodation"
 export default function Accommodation() {
-  const [imageSlider, setImageSlider] = useState([]);
+  // État pour gérer les images du carrousel
+  const [carouselImages, setCarouselImages] = useState([]);
+  // Récupération de l'ID de l'hébergement depuis l'URL
+  const accommodationId = useParams().id;
 
-  const idaccommodation = useParams().id;
-  const dataCurrentaccommodation = datas.filter(
-    (data) => data.id === idaccommodation
-  );
+  // Filtrer les données pour obtenir l'hébergement correspondant à l'ID
+  const currentAccommodation = data.find((data) => data.id === accommodationId);
 
+  console.log(currentAccommodation);
+
+  // Effet pour initialiser les images du carrousel
   useEffect(() => {
-    setImageSlider(dataCurrentaccommodation[0].pictures);
-  }, [idaccommodation, dataCurrentaccommodation]);
+    if (currentAccommodation) {
+      setCarouselImages(currentAccommodation.pictures);
+    }
+  }, [accommodationId, currentAccommodation]);
 
-  const name = dataCurrentaccommodation[0].host.name.split(" ");
-  const rating = dataCurrentaccommodation[0].rating;
-  const description = dataCurrentaccommodation[0].description;
-  const equipments = dataCurrentaccommodation[0].equipments;
+  if (!currentAccommodation) {
+    return <NotFound />;
+  }
 
+  // Extraire les informations sur l'hébergement
+  const hostName = currentAccommodation.host.name.split(" ");
+  const rating = currentAccommodation.rating;
+  const description = currentAccommodation.description;
+  const equipments = currentAccommodation.equipments;
+
+  // JSX à retourner pour le composant "Accommodation"
   return (
     <>
       <Header />
-      <Carousel imageSlider={imageSlider} />
+      <Carousel imageSlider={carouselImages} />
       <main className="accommodation">
         <div className="accommodation_content">
           <div className="accommodation_content_infos">
-            <h1>{dataCurrentaccommodation[0].title}</h1>
-            <p>{dataCurrentaccommodation[0].location}</p>
+            <h1>{currentAccommodation.title}</h1>
+            <p>{currentAccommodation.location}</p>
             <div>
-              {dataCurrentaccommodation[0].tags.map((tag, index) => {
+              {currentAccommodation.tags.map((tag, index) => {
                 return <button key={index}>{tag}</button>;
               })}
             </div>
@@ -44,11 +59,11 @@ export default function Accommodation() {
           <div className="accommodation_content_host">
             <div>
               <div className="accommodation_content_host_name">
-                <span>{name[0]}</span>
-                <span>{name[1]}</span>
+                <span>{hostName[0]}</span>
+                <span>{hostName[1]}</span>
               </div>
               <img
-                src={dataCurrentaccommodation[0].host.picture}
+                src={currentAccommodation.host.picture}
                 alt="host os this accommodation"
               />
             </div>

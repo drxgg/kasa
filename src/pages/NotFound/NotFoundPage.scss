@@ -1,9 +1,6 @@
 @import '../../sass/main.scss';
 
 .not-found-page {
-    max-width: 95%;
-    margin: 0 auto;
-    padding-bottom: 40px;
     color: $color-second;
 
     &__info {
@@ -22,7 +19,7 @@
 
     &__content {
         font-weight: 500;
-        font-size: clamp(20px, 4vw, 36px);
+        font-size: 36px;
         text-align: center;
     }
 
@@ -30,6 +27,7 @@
         display: block;
         text-align: center;
         font-weight: 500;
-        font-size: clamp(12px, 2.5vw, 18px);
+        font-size: 20px;
+        margin-bottom: 30px;
     }
 }
