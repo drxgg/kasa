@@ -31,6 +31,7 @@ const appRoutes = createBrowserRouter([
  * Composant principal de l'application.
  * Il encapsule l'application avec les routes définies.
  */
+
 function App() {
   return <RouterProvider router={appRoutes} />;
 }
