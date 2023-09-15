@@ -21,14 +21,13 @@ export default function Accommodation() {
   // Filtrer les données pour obtenir l'hébergement correspondant à l'ID
   const currentAccommodation = data.find((data) => data.id === accommodationId);
 
-  console.log(currentAccommodation);
 
   // Effet pour initialiser les images du carrousel
   useEffect(() => {
     if (currentAccommodation) {
       setCarouselImages(currentAccommodation.pictures);
     }
-  }, [accommodationId, currentAccommodation]);
+  }, [currentAccommodation]);
 
   if (!currentAccommodation) {
     return <NotFound />;

@@ -6,6 +6,7 @@ export default function Banner() {
   const [aboutPage, setAboutPage] = useState(false);
 
   const location = useLocation();
+  console.log("UseLocation", location)
 
   useEffect(() => {
     if (location.pathname === "/about") {

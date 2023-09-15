@@ -7,15 +7,21 @@ export default function Slider({ imageSlider }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex(currentIndex + 1);
-    if (currentIndex === imageSlider.length - 1) setCurrentIndex(0);
+    if (currentIndex === imageSlider.length - 1) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(currentIndex + 1);
+    }
   };
-
+  
   const prevSlide = () => {
-    setCurrentIndex(currentIndex - 1);
-    if (currentIndex === 0) setCurrentIndex(imageSlider.length - 1);
+    if (currentIndex === 0) {
+      setCurrentIndex(imageSlider.length - 1);
+    } else {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
-
+  
   return (
     <section
       style={{ backgroundImage: `url(${imageSlider[currentIndex]})` }}
